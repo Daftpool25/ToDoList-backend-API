@@ -1,19 +1,20 @@
 const express= require ("express");
 const { sequelize } = require("./database/database");
+const cors =require("cors");
 const toDoList=require("./models/toDoList")
 const users=require("./models/users");
 const { listRoute } = require("./Routes/list.routes");
+const { usersRoute } = require("./Routes/users.routes");
 const { ENV } = require("./utils/config");
-
-
-
 
 
 const app=express();
 
 //!MIDDLEWARES
+app.use(cors())
 app.use(express.json())
 app.use(listRoute)
+app.use(usersRoute)
 
 
 
