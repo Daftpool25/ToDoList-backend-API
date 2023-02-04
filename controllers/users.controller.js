@@ -57,13 +57,24 @@ const registerUser = async (req,res) => {
             if(userAlreadyExist){
                 return res.status(503).json({message:"User already exist"})
             }else{
+
+                //JWT
+                const userForToken={
+                    userName
+                }
+
+                const token=jwt.sign(userForToken,ENV.SECRET)
+
                 const newUser = await users.create({
                     email,
                     password:passwordHash,
                     userName
                 })
-                console.log("Estoy aqui")
-               return res.send(newUser)
+                
+               return res.send({
+                user:newUser,
+                token:token
+            })
             }
 
         }
