@@ -19,6 +19,7 @@ const getAllList= async (req,res) =>{
 
 
 const createNewToDo=async (req,res) =>{
+    console.log(req.body)
 
     try {
         
@@ -30,7 +31,7 @@ const createNewToDo=async (req,res) =>{
         })
         //TODO make model response and loggers
         console.log(newToDo)
-        res.send("Created")
+        res.send({success:"Created"})
 
     } catch (error) {
 
@@ -44,6 +45,7 @@ const editToDo= async (req,res) =>{
     try {
         let id=req.params.id;
         const {text,state,priority}=req.body;
+        //find by primary key
         const toDo = await toDoList.findByPk(id);
 
             toDo.text=text;
